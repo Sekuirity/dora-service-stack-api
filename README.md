@@ -1,2 +1,2 @@
-# dora-servie-stack-api
+# dora-service-stack-api
 DORA Service Stack API
