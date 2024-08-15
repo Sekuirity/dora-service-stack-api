@@ -1,0 +1,101 @@
+openapi: 3.0.0
+info:
+  title: DORA Metrics API
+  version: 1.0.0
+paths:
+  /api/pr_details/:
+    get:
+      summary: List all PR details
+      responses:
+        '200':
+          description: A list of PR details
+    post:
+      summary: Create a new PR detail
+      responses:
+        '201':
+          description: Created
+  /api/pr_details/{id}/:
+    get:
+      summary: Retrieve a PR detail by ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the PR detail
+      responses:
+        '200':
+          description: A PR detail
+    put:
+      summary: Update a PR detail by ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the PR detail
+      responses:
+        '200':
+          description: Updated
+    delete:
+      summary: Delete a PR detail by ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the PR detail
+      responses:
+        '204':
+          description: Deleted
+  /api/deployment_details/:
+    get:
+      summary: List all deployment details
+      responses:
+        '200':
+          description: A list of deployment details
+    post:
+      summary: Create a new deployment detail
+      responses:
+        '201':
+          description: Created
+  /api/deployment_details/{id}/:
+    get:
+      summary: Retrieve a deployment detail by ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the deployment detail
+      responses:
+        '200':
+          description: A deployment detail
+    put:
+      summary: Update a deployment detail by ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the deployment detail
+      responses:
+        '200':
+          description: Updated
+    delete:
+      summary: Delete a deployment detail by ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the deployment detail
+      responses:
+        '204':
+          description: Deleted

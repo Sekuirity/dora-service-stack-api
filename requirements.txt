@@ -1,0 +1,6 @@
+django
+djangorestframework
+mysqlclient
+gunicorn
+python-dotenv
+mangum

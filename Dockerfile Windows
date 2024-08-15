@@ -1,0 +1,36 @@
+# Use the official Python base image for Windows
+FROM mcr.microsoft.com/windows/servercore:ltsc2019
+
+# Set environment variables
+ENV PYTHONUNBUFFERED=1
+
+# Set working directory
+WORKDIR /app
+
+# Install required dependencies and MySQL client
+RUN powershell -Command \
+    $ErrorActionPreference = 'Stop'; \
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; \
+    Invoke-WebRequest -Uri https://aka.ms/vs/16/release/vc_redist.x64.exe -OutFile vc_redist.x64.exe; \
+    Start-Process -Wait -FilePath .\vc_redist.x64.exe -ArgumentList /quiet /norestart; \
+    Remove-Item -Force vc_redist.x64.exe; \
+    Invoke-WebRequest -Uri https://www.python.org/ftp/python/3.9.7/python-3.9.7-amd64.exe -OutFile python-3.9.7-amd64.exe; \
+    Start-Process -Wait -FilePath .\python-3.9.7-amd64.exe -ArgumentList /quiet InstallAllUsers=1 PrependPath=1; \
+    Remove-Item -Force python-3.9.7-amd64.exe; \
+    python -m pip install --upgrade pip; \
+    python -m pip install mysqlclient
+
+# Copy requirements.txt and install Python dependencies
+COPY requirements.txt /app/
+RUN powershell -Command \
+    $ErrorActionPreference = 'Stop'; \
+    python -m pip install --no-cache-dir -r requirements.txt
+
+# Copy the application code to the container
+COPY . /app/
+
+# Expose port 8001
+EXPOSE 8001
+
+# Run the Django application
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8001"]

@@ -1,0 +1,8 @@
+{
+    "httpMethod": "GET",
+    "path": "/api/pr_details",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+  
